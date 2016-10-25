@@ -5,14 +5,17 @@ using UnityEngine.UI;
 public class UITextController : MonoBehaviour {
 
 	int monteCarloSteps;
-	Text text;
-	string textString;
+	Text energyText;
+	Text magnetisationText;
+
+	string energyTextString;
+	string magnetisationTextString;
 
 	// Use this for initialization
 	void Start () {
 
-		text = GetComponent<Text> ();
-		text.text = "Average Energy: ";
+		energyText = transform.GetChild (0).GetComponent<Text> ();
+		magnetisationText = transform.GetChild (1).GetComponent<Text> ();
 	
 	}
 	
@@ -20,8 +23,14 @@ public class UITextController : MonoBehaviour {
 	void Update () {
 
 		monteCarloSteps = IsingModelController.Instance.isingModel.monteCarloSteps;
-		textString = ( "average Energy after " + monteCarloSteps + " steps: " + IsingModelController.Instance.isingModel.averageEnergyTotal() );
-		text.text = textString;
+
+		energyTextString = ( "average Energy per spin after " + monteCarloSteps + " steps: " + 
+			(IsingModelController.Instance.isingModel.averageEnergyTotal()/IsingModelController.Instance.N).ToString("F3") );
+		magnetisationTextString = ( "average Magnetisation after " + monteCarloSteps + " steps: " + 
+			(IsingModelController.Instance.isingModel.averageMagnetisation()).ToString("F10") );
+
+		energyText.text = energyTextString;
+		magnetisationText.text = magnetisationTextString;
 	
 	}
 }
