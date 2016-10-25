@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class SpinTileRendererController : MonoBehaviour {
 
+	public static SpinTileRendererController Instance;
+
 	public Sprite spinTileSprite;
 	public Sprite spinUpSprite;
 	public Sprite spinDownSprite;
@@ -20,11 +22,50 @@ public class SpinTileRendererController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		spinData = IsingModelController.Instance.isingModel.spins;
-		n = spinData.Count;
+		Instance = this;
+
 		spinTileGameObjectMap = new Dictionary<int, GameObject> ();
 		spinOrientationGameObjectMap = new Dictionary<int, GameObject> ();
 		spinOrientationSpriteRendererMap = new Dictionary<int, SpriteRenderer> ();
+
+		InitializeEverything ();
+	
+	}
+
+	// Update is called once per frame
+	void LateUpdate () {
+
+		spinData = IsingModelController.Instance.isingModel.spins;
+
+		for (int i = 0; i < spinData.Count; i++)
+		{
+			if (spinData[i] == 1)
+				spinOrientationSpriteRendererMap[i].sprite = spinUpSprite;
+
+			else if (spinData[i] == -1)
+				spinOrientationSpriteRendererMap[i].sprite = spinDownSprite;
+		}
+	}
+
+//	public void DestroyChildren()
+//	{
+//		for (int i = 0; i < transform.childCount; i++)
+//		{
+//			Destroy (transform.GetChild (i).gameObject);
+//		}
+//
+//		spinTileGameObjectMap.Clear ();
+//		spinOrientationGameObjectMap.Clear ();
+//		spinOrientationSpriteRendererMap.Clear ();
+//
+//		InitializeEverything ();
+//	}
+
+	void InitializeEverything()
+	{
+		spinData = IsingModelController.Instance.isingModel.spins;
+		n = spinData.Count;
+
 
 		// Create a GameObject for each spinTile and assign them
 		// both to a dictionary entry, thus giving the sprite the
@@ -71,21 +112,6 @@ public class SpinTileRendererController : MonoBehaviour {
 			else if (spinData[i] == -1)
 				spinOrientationSpriteRendererMap[i].sprite = spinDownSprite;
 		}
-	
 	}
 
-	// Update is called once per frame
-	void LateUpdate () {
-
-		spinData = IsingModelController.Instance.isingModel.spins;
-
-		for (int i = 0; i < spinData.Count; i++)
-		{
-			if (spinData[i] == 1)
-				spinOrientationSpriteRendererMap[i].sprite = spinUpSprite;
-
-			else if (spinData[i] == -1)
-				spinOrientationSpriteRendererMap[i].sprite = spinDownSprite;
-		}
-	}
 }
