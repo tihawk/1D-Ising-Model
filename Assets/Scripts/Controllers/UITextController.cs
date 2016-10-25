@@ -25,9 +25,9 @@ public class UITextController : MonoBehaviour {
 		monteCarloSteps = IsingModelController.Instance.isingModel.monteCarloSteps;
 
 		energyTextString = ( "average Energy per spin after " + monteCarloSteps + " steps: " + 
-			(IsingModelController.Instance.isingModel.averageEnergyTotal()/IsingModelController.Instance.N).ToString("F3") );
+			(IsingModelController.Instance.isingModel.averageEnergyTotal()/IsingModelController.Instance.N).ToString("F5") );
 		magnetisationTextString = ( "average Magnetisation after " + monteCarloSteps + " steps: " + 
-			(IsingModelController.Instance.isingModel.averageMagnetisation()).ToString("F10") );
+			(IsingModelController.Instance.isingModel.averageMagnetisation()).ToString("F5") );
 
 		energyText.text = energyTextString;
 		magnetisationText.text = magnetisationTextString;
