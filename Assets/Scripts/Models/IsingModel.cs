@@ -71,7 +71,7 @@ public class IsingModel {
 		w [4] = Math.Exp (-4d / temperature);
 		w [2] = Math.Exp (-2d / temperature);
 
-		resetData ();
+		resetData (N, temperature);
 	}
 
 	public double averageMagnetisation()
@@ -95,8 +95,11 @@ public class IsingModel {
 		return temp / (temperature * temperature);
 	}
 
-	public void resetData()
+	public void resetData(int n, double temperature)
 	{
+		this.N = n;
+		this.temperature = temperature;
+
 		monteCarloSteps = successfulFlips = 0;
 		energyAccumulator = energySquaredAccumulator = 
 			magnetisationAccumulator = magnetisationSquaredAccumulator = 0d;

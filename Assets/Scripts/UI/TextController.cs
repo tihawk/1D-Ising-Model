@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class UITextController : MonoBehaviour {
+public class TextController : MonoBehaviour {
 
 	int monteCarloSteps;
 	Text energyText;
@@ -25,7 +25,7 @@ public class UITextController : MonoBehaviour {
 		monteCarloSteps = IsingModelController.Instance.isingModel.monteCarloSteps;
 
 		energyTextString = ( "average Energy per spin after " + monteCarloSteps + " steps: " + 
-			(IsingModelController.Instance.isingModel.averageEnergyTotal()/IsingModelController.Instance.N).ToString("F5") );
+			(IsingModelController.Instance.isingModel.averageEnergyTotal()/IsingModelController.N).ToString("F5") );
 		magnetisationTextString = ( "average Magnetisation after " + monteCarloSteps + " steps: " + 
 			(IsingModelController.Instance.isingModel.averageMagnetisation()).ToString("F5") );
 
