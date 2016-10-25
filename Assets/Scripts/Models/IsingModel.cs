@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class IsingModel {
 
-	// Critical Temperature, God knows what it actually is:
-	// NOTE: Doesn't seem to apply to this model! Being close to zero
-	// degrees makes the model behave like around a critical temperature though.
+	// Critical Temperature
+	// NOTE: Doesn't to apply to the 1D model!
 	public static double critTemperature = 2d / Math.Log (1d + Math.Sqrt (2d));
 	// Number of spins:
 	int N;
@@ -144,7 +143,7 @@ public class IsingModel {
 		}
 		// At the end of the cycle we just change some variables.
 		energyAccumulator += energy;
-		energyAccumulator += energy * energy;
+		energySquaredAccumulator += energy * energy;
 		magnetisationAccumulator += magnetisation;
 		magnetisationSquaredAccumulator += magnetisation * magnetisation;
 		monteCarloSteps++;
