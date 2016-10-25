@@ -23,7 +23,7 @@ public class IsingModelController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void LateUpdate () {
+	void Update () {
 
 		isingModel.doOneMonteCarloStep ();
 	

@@ -75,8 +75,14 @@ public class IsingModel {
 		resetData ();
 	}
 
+	public double averageMagnetisation()
+	{
+		return magnetisationAccumulator / monteCarloSteps;
+	}
+
 	public double averageEnergyTotal()
 	{
+		//FIXME This seems completely off!
 		return energyAccumulator / monteCarloSteps;
 	}
 		
@@ -103,7 +109,10 @@ public class IsingModel {
 	{
 		System.Random random = new System.Random ();
 
-		for (int j = 0; j < N; j++)
+
+		// Make sure to do the appropriate number of tries, by making N-2 tries, not N,
+		// because of the boundary conditions
+		for (int j = 0; j < N-2; j++)
 		{
 			// Choosing a random spin from the N available ones.
 			// NOTE: To finally implement free boundary conditions,
@@ -140,6 +149,7 @@ public class IsingModel {
 		magnetisationSquaredAccumulator += magnetisation * magnetisation;
 		monteCarloSteps++;
 		//Debug.Log ("steps: " + monteCarloSteps);
+		//Debug.Log( 4/Math.Log( 1d + 4d/ (energyAccumulator / (monteCarloSteps*N)) ));
 
 	}
 }
