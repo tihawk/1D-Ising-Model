@@ -82,6 +82,7 @@ public class IsingModel {
 
 	public double averageEnergyTotal()
 	{
+		//FIXME This seems completely off!
 		return energyAccumulator / monteCarloSteps;
 	}
 		
@@ -108,6 +109,9 @@ public class IsingModel {
 	{
 		System.Random random = new System.Random ();
 
+
+		// Make sure to do the appropriate number of tries, by making N-2 tries, not N,
+		// because of the boundary conditions
 		for (int j = 0; j < N-2; j++)
 		{
 			// Choosing a random spin from the N available ones.
