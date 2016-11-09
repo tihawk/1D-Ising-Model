@@ -81,7 +81,6 @@ public class IsingModel {
 
 	public double averageEnergyTotal()
 	{
-		//FIXME This seems completely off!
 		return energyAccumulator / monteCarloSteps;
 	}
 		
@@ -90,9 +89,18 @@ public class IsingModel {
 
 		double averageEnergySquared = energySquaredAccumulator / monteCarloSteps;
 		double averageEnergy = energyAccumulator / monteCarloSteps;
-		double temp = averageEnergySquared - averageEnergy * averageEnergy;
+		double averageEnergyVariance = averageEnergySquared - averageEnergy * averageEnergy;
 
-		return temp / (temperature * temperature);
+		return averageEnergyVariance / (temperature * temperature);
+	}
+
+	public double AverageSusceptibility()
+	{
+		double averageMagnetisationSquared = magnetisationSquaredAccumulator / monteCarloSteps;
+		double averageMagnetisation = magnetisationAccumulator / monteCarloSteps;
+		double averageMagnetisationVariance = averageMagnetisationSquared - averageMagnetisation * averageMagnetisation;
+
+		return averageMagnetisationVariance / (temperature * N);
 	}
 
 	public void resetData(int n, double temperature)
@@ -105,16 +113,14 @@ public class IsingModel {
 			magnetisationAccumulator = magnetisationSquaredAccumulator = 0d;
 	}
 
-	//TODO: Implement incrementing Temperature and Number of spins, also graphing somehow.
-
 	public void doOneMonteCarloStep()
 	{
 		System.Random random = new System.Random ();
 
 
-		// Make sure to do the appropriate number of tries, by making N-2 tries, not N,
-		// because of the boundary conditions
-		for (int j = 0; j < N-2; j++)
+		// Make sure to do the appropriate number of tries, by making N tries, not N-2,
+		// because we have N+2 elements.
+		for (int j = 0; j < N; j++)
 		{
 			// Choosing a random spin from the N available ones.
 			// NOTE: To finally implement free boundary conditions,
