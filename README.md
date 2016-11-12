@@ -1,7 +1,5 @@
 # 1D-Ising-Model
 A Unity-based Monte Carlo simulation of the Ising Model in 1D using the Metropolis Algorithm with free boundary conditions.
-<<<<<<< HEAD
-=======
 ![ScreenShot](/Reports/Images/1d_screenshot.png)
 # Installation
 Option 1: The newest build with a Windows executable can be found in the releases page.
